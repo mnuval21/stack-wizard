@@ -1,0 +1,8 @@
+# OS files
+.DS_Store
+
+# Claude worktrees
+.claude/worktrees/
+
+# Dependencies
+node_modules/

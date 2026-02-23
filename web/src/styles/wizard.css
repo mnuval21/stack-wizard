@@ -1,0 +1,150 @@
+/* ============================================
+   Wizard Layout — Two-Panel Shell
+   ============================================ */
+
+.wizard-shell {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    height: 80vh;
+    min-height: 520px;
+}
+
+.wizard-panel {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--terminal-border);
+    min-height: 0;
+}
+
+/* Scrollable content area — nav lives outside this */
+.wizard-panel-scroll {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    padding: var(--terminal-padding);
+    padding-bottom: 0.5rem;
+}
+
+.wizard-question {
+    font-size: 1.15rem;
+    color: var(--terminal-green);
+    text-shadow: var(--terminal-text-glow);
+    margin-bottom: 0.5rem;
+}
+
+.wizard-prompt {
+    color: var(--terminal-green-dim);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.wizard-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Scroll overflow hint — retro bouncing arrow */
+.scroll-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    padding: 0.3rem 0;
+    color: var(--terminal-amber);
+    font-family: var(--font-terminal);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    opacity: 0.85;
+    pointer-events: none;
+    flex-shrink: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.scroll-hint--hidden {
+    opacity: 0;
+    transform: translateY(5px);
+}
+
+.scroll-hint-arrow {
+    font-size: 1.1rem;
+    animation: scrollBounce 0.9s ease-in-out infinite;
+    display: block;
+    text-shadow: 0 0 8px var(--terminal-amber);
+}
+
+.scroll-hint-label {
+    font-size: 0.65rem;
+    opacity: 0.6;
+}
+
+@keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(5px); }
+}
+
+.wizard-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem var(--terminal-padding);
+    border-top: 1px solid var(--terminal-border);
+    flex-shrink: 0;
+}
+
+.wizard-navigation-spacer {
+    flex: 1;
+}
+
+.wizard-step-indicator {
+    font-size: 0.8rem;
+    color: var(--terminal-green-dim);
+    letter-spacing: 0.1em;
+}
+
+/* Preview side */
+.preview-side {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.preview-side .preview-panel {
+    flex: 1;
+    overflow-y: scroll;
+}
+
+.preview-header {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--terminal-border);
+    font-size: 0.85rem;
+    color: var(--terminal-amber);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    background: var(--terminal-bg-lighter);
+}
+
+/* ---- Mobile Responsive ---- */
+
+@media (max-width: 767px) {
+    .wizard-shell {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        height: auto;
+        min-height: none;
+    }
+
+    .wizard-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--terminal-border);
+        min-height: 0;
+    }
+
+    .preview-side {
+        min-height: 0;
+        max-height: 50vh;
+    }
+}
